@@ -1,6 +1,6 @@
 import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { Search, RefreshCw, MoreVertical, ChevronLeft, ChevronRight, Headphones, Shirt, Mouse, Cable, AlertTriangle, AlertCircle } from 'lucide-react';
 
 export default function Index({ auth, products }) {
@@ -167,7 +167,11 @@ export default function Index({ auth, products }) {
                                                     ) : null}
                                                 </div>
                                             </td>
-                                            <td className="py-4 px-6 font-subtitle-medium text-subtitle-medium text-text-primary">{product.name}</td>
+                                            <td className="py-4 px-6 font-subtitle-medium text-subtitle-medium text-text-primary">
+                                                <Link href={`/products/${product.id}`} className="hover:text-primary transition-colors hover:underline">
+                                                    {product.name}
+                                                </Link>
+                                            </td>
                                             <td className="py-4 px-6 font-body-base text-body-base text-text-secondary">{product.sku}</td>
                                             <td className="py-4 px-6">
                                                 <span className="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full bg-slate-100 text-slate-700 font-label-sm text-label-sm">
@@ -188,9 +192,9 @@ export default function Index({ auth, products }) {
                                                 </span>
                                             </td>
                                             <td className="py-4 px-6 text-right">
-                                                <button className="text-text-secondary hover:text-primary-container p-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <Link href={`/products/${product.id}`} className="inline-block text-text-secondary hover:text-primary-container p-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                                     <MoreVertical className="w-5 h-5" />
-                                                </button>
+                                                </Link>
                                             </td>
                                         </tr>
                                     );
