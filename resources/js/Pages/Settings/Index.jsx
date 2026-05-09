@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
-import { Store, ShoppingCart, AlertTriangle, User, Upload, Shield, Key, Camera } from 'lucide-react';
+import { Store, ShoppingCart, AlertTriangle, User, Upload, Shield, Key, Camera, CreditCard, Download, CheckCircle, Receipt } from 'lucide-react';
 
 // --- DICTIONARIES FOR TAILWIND CLASSES ---
 const iconStyles = {
@@ -108,6 +108,126 @@ function ProfileSecurityTab() {
                             <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-border-subtle after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
                         </label>
                     </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function BillingTab() {
+    return (
+        <div className="space-y-8">
+            {/* Top Cards: Current Plan & Payment Method */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter-md">
+                
+                {/* Current Plan Card */}
+                <div className="bg-surface-bg rounded-xl shadow-sm border border-border-subtle p-gutter-md flex flex-col h-full">
+                    <div className="flex items-center gap-2 mb-6">
+                        <CheckCircle className="w-5 h-5 text-emerald-600" />
+                        <h3 className="font-header-semibold text-header-semibold text-text-primary">Current Plan</h3>
+                    </div>
+                    <div className="mb-6 flex-1">
+                        <div className="flex items-baseline gap-2">
+                            <span className="font-display-bold text-4xl text-text-primary">$49</span>
+                            <span className="font-body-base text-body-base text-text-secondary">/ month</span>
+                        </div>
+                        <p className="font-subtitle-medium text-subtitle-medium text-text-primary mt-3">Pro Business Tier</p>
+                        <p className="font-label-sm text-label-sm text-text-secondary mt-1">Includes AI-driven repricing for up to 10,000 SKUs.</p>
+                    </div>
+                    <div className="pt-4 border-t border-border-subtle">
+                        <button className="w-full py-2 bg-canvas-bg text-text-primary border border-border-subtle rounded-lg font-subtitle-medium text-subtitle-medium hover:bg-slate-100 transition-colors focus:ring-2 focus:ring-primary focus:outline-none">
+                            Upgrade Plan
+                        </button>
+                    </div>
+                </div>
+
+                {/* Payment Method Card */}
+                <div className="bg-surface-bg rounded-xl shadow-sm border border-border-subtle p-gutter-md flex flex-col h-full">
+                    <div className="flex items-center gap-2 mb-6">
+                        <CreditCard className="w-5 h-5 text-primary" />
+                        <h3 className="font-header-semibold text-header-semibold text-text-primary">Payment Method</h3>
+                    </div>
+                    <div className="flex items-center gap-4 p-4 border border-border-subtle rounded-lg bg-canvas-bg mb-6 flex-1">
+                        <div className="w-14 h-10 bg-slate-200 rounded flex items-center justify-center font-display-bold text-slate-600 text-xs tracking-wider border border-slate-300 shadow-sm">
+                            VISA
+                        </div>
+                        <div>
+                            <p className="font-subtitle-medium text-subtitle-medium text-text-primary">Visa ending in 4242</p>
+                            <p className="font-label-sm text-label-sm text-text-secondary mt-0.5">Expires 12/2028</p>
+                        </div>
+                    </div>
+                    <div className="pt-4 border-t border-border-subtle">
+                        <button className="w-full py-2 bg-canvas-bg text-text-primary border border-border-subtle rounded-lg font-subtitle-medium text-subtitle-medium hover:bg-slate-100 transition-colors focus:ring-2 focus:ring-primary focus:outline-none">
+                            Update Payment Method
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {/* Billing History Table */}
+            <div className="bg-surface-bg rounded-xl shadow-sm border border-border-subtle overflow-hidden">
+                <div className="p-gutter-md border-b border-border-subtle flex items-center gap-2">
+                    <Receipt className="w-5 h-5 text-primary" />
+                    <h3 className="font-header-semibold text-header-semibold text-text-primary">Billing History</h3>
+                </div>
+                <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse">
+                        <thead>
+                            <tr className="bg-canvas-bg border-b border-border-subtle">
+                                <th className="px-6 py-3 font-label-sm text-label-sm text-text-secondary uppercase tracking-wider">Date</th>
+                                <th className="px-6 py-3 font-label-sm text-label-sm text-text-secondary uppercase tracking-wider">Amount</th>
+                                <th className="px-6 py-3 font-label-sm text-label-sm text-text-secondary uppercase tracking-wider">Status</th>
+                                <th className="px-6 py-3 font-label-sm text-label-sm text-text-secondary uppercase tracking-wider text-right">Invoice</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-border-subtle">
+                            <tr className="hover:bg-slate-50 transition-colors">
+                                <td className="px-6 py-4 font-body-base text-body-base text-text-primary">Oct 1, 2026</td>
+                                <td className="px-6 py-4 font-body-base text-body-base text-text-primary">$49.00</td>
+                                <td className="px-6 py-4">
+                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 font-label-sm text-label-sm">
+                                        Paid
+                                    </span>
+                                </td>
+                                <td className="px-6 py-4 text-right">
+                                    <button className="text-primary hover:text-indigo-700 transition-colors flex items-center justify-end gap-1.5 ml-auto font-subtitle-medium text-subtitle-medium">
+                                        <Download className="w-4 h-4" />
+                                        PDF
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr className="hover:bg-slate-50 transition-colors">
+                                <td className="px-6 py-4 font-body-base text-body-base text-text-primary">Sep 1, 2026</td>
+                                <td className="px-6 py-4 font-body-base text-body-base text-text-primary">$49.00</td>
+                                <td className="px-6 py-4">
+                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 font-label-sm text-label-sm">
+                                        Paid
+                                    </span>
+                                </td>
+                                <td className="px-6 py-4 text-right">
+                                    <button className="text-primary hover:text-indigo-700 transition-colors flex items-center justify-end gap-1.5 ml-auto font-subtitle-medium text-subtitle-medium">
+                                        <Download className="w-4 h-4" />
+                                        PDF
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr className="hover:bg-slate-50 transition-colors">
+                                <td className="px-6 py-4 font-body-base text-body-base text-text-primary">Aug 1, 2026</td>
+                                <td className="px-6 py-4 font-body-base text-body-base text-text-primary">$49.00</td>
+                                <td className="px-6 py-4">
+                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 font-label-sm text-label-sm">
+                                        Paid
+                                    </span>
+                                </td>
+                                <td className="px-6 py-4 text-right">
+                                    <button className="text-primary hover:text-indigo-700 transition-colors flex items-center justify-end gap-1.5 ml-auto font-subtitle-medium text-subtitle-medium">
+                                        <Download className="w-4 h-4" />
+                                        PDF
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -247,11 +367,7 @@ export default function Index({ integrations }) {
                 </div>
             )}
 
-            {activeTab === 'billing' && (
-                <div className="bg-surface-bg rounded-xl shadow-sm border border-border-subtle p-gutter-md flex items-center justify-center h-48 text-text-secondary">
-                    Billing implementation coming soon...
-                </div>
-            )}
+            {activeTab === 'billing' && <BillingTab />}
 
             {/* Disconnect Modal Overlay */}
             {isDisconnectModalOpen && (
