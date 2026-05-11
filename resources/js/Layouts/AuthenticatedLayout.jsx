@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Sidebar from './Sidebar';
 import TopNav from './TopNav';
 import { usePage } from '@inertiajs/react';
-import { Sparkles } from 'lucide-react';
+import GlobalAdvisorWidget from '@/Components/GlobalAdvisorWidget';
 
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
@@ -22,10 +22,7 @@ export default function AuthenticatedLayout({ header, children }) {
                 </main>
 
                 {/* Global RAG Strategy Advisor Floating Action Button */}
-                <button className="absolute bottom-8 right-8 bg-white shadow-lg rounded-full px-6 py-4 flex items-center space-x-3 border border-slate-200 hover:scale-105 transition-transform z-50 text-slate-900 font-medium text-sm">
-                    <Sparkles className="text-indigo-600 w-5 h-5" />
-                    <span className="hidden md:inline">RAG Strategy Advisor</span>
-                </button>
+                <GlobalAdvisorWidget />
             </div>
         </div>
     );
