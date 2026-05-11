@@ -2,6 +2,7 @@ import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { Sparkles, Brain, ArrowUp, ArrowRight, ArrowDown } from 'lucide-react';
+import EmptyStoreState from '@/Components/EmptyStoreState';
 
 export default function CommandCenter({ auth, kpis, recentDecisions }) {
     // Fallback mock data if not provided
@@ -46,6 +47,18 @@ export default function CommandCenter({ auth, kpis, recentDecisions }) {
             actionType: 'Decreased price'
         }
     ];
+
+    if (!auth?.user?.store_connected) {
+        return (
+            <AuthenticatedLayout
+                user={auth?.user}
+                header={<h2 className="font-header-semibold text-header-semibold text-text-primary">Dashboard</h2>}
+            >
+                <Head title="Command Center" />
+                <EmptyStoreState />
+            </AuthenticatedLayout>
+        );
+    }
 
     return (
         <AuthenticatedLayout

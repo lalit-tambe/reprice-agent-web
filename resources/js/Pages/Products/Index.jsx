@@ -2,6 +2,7 @@ import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import { Search, RefreshCw, MoreVertical, ChevronLeft, ChevronRight, Headphones, Shirt, Mouse, Cable, AlertTriangle, AlertCircle } from 'lucide-react';
+import EmptyStoreState from '@/Components/EmptyStoreState';
 
 export default function Index({ auth, products }) {
     // Fallback mock data if products aren't provided by Laravel yet
@@ -93,6 +94,18 @@ export default function Index({ auth, products }) {
             { url: "#", label: "Next &raquo;", active: false },
         ]
     };
+
+    if (!auth?.user?.store_connected) {
+        return (
+            <AuthenticatedLayout
+                user={auth?.user}
+                header={<h2 className="font-header-semibold text-header-semibold text-text-primary">Inventory & Pricing</h2>}
+            >
+                <Head title="Products" />
+                <EmptyStoreState />
+            </AuthenticatedLayout>
+        );
+    }
 
     return (
         <AuthenticatedLayout
