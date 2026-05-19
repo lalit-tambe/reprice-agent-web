@@ -22,3 +22,10 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+# Ignore all AI Agent context and configuration files
+opencode.json
+.opencode.json
+AGENTS.md
+ARCHITECTURE.md
+DESIGN.md
+.gitignore

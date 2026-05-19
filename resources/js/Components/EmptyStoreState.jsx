@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Store, ShoppingBag, Link as LinkIcon, HelpCircle } from 'lucide-react';
 
 export default function EmptyStoreState() {
+    const [shopDomain, setShopDomain] = useState('');
+
+    const shopifyConnectUrl = shopDomain 
+        ? `/auth/shopify/redirect?shop=${encodeURIComponent(shopDomain)}` 
+        : '/auth/shopify/redirect';
+
     return (
         <div className="flex-1 flex flex-col items-center pt-20 px-canvas-padding pb-canvas-padding w-full max-w-5xl mx-auto">
             <div className="text-center mb-12 max-w-2xl">
@@ -16,11 +22,22 @@ export default function EmptyStoreState() {
                         <Store className="w-8 h-8" />
                     </div>
                     <h2 className="font-header-semibold text-header-semibold text-text-primary mb-3">Shopify</h2>
-                    <p className="font-body-base text-body-base text-text-secondary mb-8 flex-1">Sync products and manage pricing via the Shopify Admin API.</p>
-                    <button className="w-full bg-primary text-on-primary font-subtitle-medium text-subtitle-medium py-3 px-6 rounded-lg shadow-sm hover:bg-primary-container transition-colors duration-200 flex items-center justify-center gap-2">
+                    <p className="font-body-base text-body-base text-text-secondary mb-6 flex-1">Sync products and manage pricing via the Shopify Admin API.</p>
+                    
+                    <div className="w-full mb-4">
+                        <input 
+                            type="text" 
+                            value={shopDomain}
+                            onChange={(e) => setShopDomain(e.target.value)}
+                            placeholder="your-store.myshopify.com" 
+                            className="w-full bg-surface-container-low border border-border-subtle text-text-primary rounded-lg px-4 py-2 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                        />
+                    </div>
+
+                    <a href={shopifyConnectUrl} className="w-full bg-primary text-on-primary font-subtitle-medium text-subtitle-medium py-3 px-6 rounded-lg shadow-sm hover:bg-primary-container transition-colors duration-200 flex items-center justify-center gap-2">
                         <LinkIcon className="w-4 h-4" />
                         Connect Shopify
-                    </button>
+                    </a>
                 </div>
 
                 {/* Amazon Card */}
